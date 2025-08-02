@@ -23,7 +23,7 @@ class Calculadora {
             this.finOperacion = false
         }
         if (numero === '.' && this.valorActual.includes('.')) return
-        if (this.valorActual.length >= 11) return // Limite a 11 caracteres
+        if (this.valorActual.length >= 14) return // Limite a 11 caracteres
         this.valorActual = this.valorActual.toString() + numero.toString()
     }
 
