@@ -9,21 +9,24 @@ class Calculadora {
         this.valorActual = ''
         this.valorPrevio = ''
         this.operacion = undefined
+         
         this.finOperacion = false //  Se añadió nuevo codigo
+        // 2  Bug 4
         this.operacionCompleta = '' // Se añadió nuevo codigo
     }
 
     borrar() {
         this.valorActual = this.valorActual.toString().slice(0, -1)
     }
-
+/// 1 bug 3........................
     agregarNumero(numero) {
         if (this.finOperacion) {           // Limpia después de presionar "="
             this.valorActual = ''
             this.finOperacion = false
         }
+        // 1 ................BUG 1
         if (numero === '.' && this.valorActual.includes('.')) return
-        if (this.valorActual.length >= 14) return // Limite a 11 caracteres
+        if (this.valorActual.length >= 14) return // Limite a 14 caracteres
         this.valorActual = this.valorActual.toString() + numero.toString()
     }
 
@@ -59,14 +62,15 @@ class Calculadora {
             default:
                 return
         }
-
+//1 bug 3.............................
         this.operacionCompleta = `${this.obtenerNumero(this.valorPrevio)} ${this.operacion} ${this.obtenerNumero(this.valorActual)} =` // Muestra la operación
         this.valorActual = resultado
         this.operacion = undefined
         this.valorPrevio = ''
+        /// 2 Bug 4....................
         this.finOperacion = true // Marca que se presionó "="
     }
-
+/// 1...................................BUg 2
     porcentaje() { // agregando Nuevo método
         if (this.valorActual === '') return
         this.valorActual = (parseFloat(this.valorActual) / 100).toString()
@@ -90,7 +94,7 @@ class Calculadora {
             return mostrarEnteros
         }
     }
-
+/// 3 bug 4
     actualizarPantalla() {
         this.valorActualTextElement.innerText = this.obtenerNumero(this.valorActual)
         if (this.finOperacion) {
@@ -144,7 +148,7 @@ borrarButton.addEventListener('click', _button => {
     calculator.borrar()
     calculator.actualizarPantalla()
 })
-
+// 2 ......................... Bug 2
 // Agregando Botón de porcentaje funcional
 porcentajeButton.addEventListener('click', () => {
     calculator.porcentaje()
